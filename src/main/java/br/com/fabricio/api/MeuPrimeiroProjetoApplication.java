@@ -33,7 +33,7 @@ public class MeuPrimeiroProjetoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner() {
 		return args -> {
-//			System.out.println("Elementos por página = "+qtdPorPagina);
+			System.out.println("Elementos por página = "+qtdPorPagina);
 //			encodeSenhaSpringSecurity();
 //			consultasJPASpring();
 			exemploService.testarServico();
