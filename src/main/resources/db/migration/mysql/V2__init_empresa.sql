@@ -1,0 +1,2 @@
+insert into empresa values (null, '123456789', current_date(), current_date(), 'Empresa Admin Teste LTDA');
+insert into empresa values (null, '987654321', current_date(), current_date(), 'Empresa Teste 1 SA');
