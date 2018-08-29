@@ -10,7 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import br.com.fabricio.api.documents.Cliente;
 import br.com.fabricio.api.entidades.Empresa;
+import br.com.fabricio.api.repositorios.ClienteRepository;
 import br.com.fabricio.api.repositorios.EmpresaRepository;
 import br.com.fabricio.api.service.ExemploService;
 import br.com.fabricio.api.utils.SenhaUtils;
@@ -24,6 +26,8 @@ public class MeuPrimeiroProjetoApplication {
 	private EmpresaRepository empresaRepository;
 	@Autowired
 	private ExemploService exemploService;
+	@Autowired
+	private ClienteRepository clienteRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeuPrimeiroProjetoApplication.class, args);
@@ -36,8 +40,31 @@ public class MeuPrimeiroProjetoApplication {
 			System.out.println("Elementos por página = "+qtdPorPagina);
 //			encodeSenhaSpringSecurity();
 //			consultasJPASpring();
-			exemploService.testarServico();
+//			exemploService.testarServico();
+//			testeMongoDb();
 		};
+	}
+
+	private void testeMongoDb() {
+		clienteRepository.deleteAll();
+		
+		clienteRepository.save(new Cliente("Joao", 33));
+		clienteRepository.save(new Cliente("Pedro", 18));
+		clienteRepository.save(new Cliente("Maria", 26));
+		clienteRepository.save(new Cliente("Ana", 22));
+		
+		System.out.println("Listar todos com o findAll(): \n ################### \n");
+		clienteRepository.findAll().forEach(System.out :: println);
+		System.out.println();
+		
+		System.out.println("Buscar um unico cliente com o nome: Joao \n ################### \n");
+		System.out.println(clienteRepository.findByNome("Joao"));
+		System.out.println();
+		
+		System.out.println("Cliente com idade entre 18 e 30 \n ################### \n");
+		System.out.println(clienteRepository.findByIdadeBetween(18, 30));
+		System.out.println();
+		
 	}
 
 	private void consultasJPASpring() {
